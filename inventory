@@ -1,0 +1,9 @@
+[ubuntu]
+13.233.208.54
+
+[multi:children]
+ubuntu
+
+[multi:vars]
+ansible_ssh_user=ubuntu
+ansible_ssh_private_key_file=/home/asmath/digital.pem
