@@ -1,26 +1,18 @@
 ---
-  - name: CT testing
+  - name: CI testing
     on:
       pull_request:
       push:
         branches:
           - main
     jobs:
-      build:
+      test:
+        name: Testing demo
         runs-on: ubuntu-latest
         steps:
         - name: checkout repo
           uses: actions/checkout@v2
+        - name: Install dependency
+          run: pip3 Install yamllint ansible-lint
         - name: Lint Ansible Playbook
           uses: ansible/ansible-lint-action@master
-          with:
-            targets: ""
-      deployAnsible:
-        needs: build
-        runs-on: ubuntu-latest
-        steps:
-        - uses: actions/checkout@v1
-        - uses: ./.github/actions/ansible
-          with:
-            playbook: pingtest.yml
-            inventory: localhost
